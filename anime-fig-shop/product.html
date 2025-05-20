@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Mismo head que index.html -->
+    <title>Detalle de Producto - Anime Fig Shop</title>
+</head>
+<body>
+    <!-- Mismo header que index.html -->
+    
+    <main class="main-content">
+        <section class="product-detail">
+            <div class="container" id="product-detail">
+                <!-- Contenido cargado dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Mismo footer que index.html -->
+    
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (productId) {
+                const { data } = await supabase
+                    .from('products')
+                    .select('*')
+                    .eq('id', productId)
+                    .single();
+                
+                if (data) renderProductDetail(data);
+            }
+        });
+        
+        function renderProductDetail(product) {
+            // Implementar renderizado de detalles
+        }
+    </script>
+</body>
+</html>

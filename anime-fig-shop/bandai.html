@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Mismo head que index.html -->
+    <title>Bandai - Anime Fig Shop</title>
+</head>
+<body>
+    <!-- Mismo header que index.html -->
+    
+    <main class="main-content">
+        <section class="category-products">
+            <div class="container">
+                <h1>Productos Bandai</h1>
+                <div class="product-grid" id="bandai-products">
+                    <!-- Productos se cargarán con JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mismo footer que index.html -->
+    
+    <script src="js/products.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const products = await getProductsByBrand('bandai');
+            renderProducts(products, '#bandai-products');
+        });
+    </script>
+</body>
+</html>
