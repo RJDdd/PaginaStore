@@ -1,6 +1,6 @@
 // Configuración de Supabase
-const supabaseUrl = 'TU_URL_SUPABASE';
-const supabaseKey = 'TU_KEY_SUPABASE';
+const supabaseUrl = 'https://lrghqupggsruqgxtgsmo.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Obtener productos por categoría
