@@ -45,20 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     // Búsqueda de productos
 document.querySelector('.search-bar input').addEventListener('keyup', async (e) => {
-    if (e.key === 'Enter') {
-        const query = e.target.value.trim();
-        if (query) {
-            const { data } = await supabase
-                .from('products')
-                .select('*')
-                .ilike('name', `%${query}%`);
-            
-            if (data.length === 1) {
-                window.location.href = `product.html?id=${data[0].id}`;
-            } else {
-                window.location.href = `search.html?q=${query}`;
-            }
-        }
+  if (e.key === 'Enter') {
+    const query = e.target.value.trim();
+    if (query) {
+      window.location.href = `search.html?q=${encodeURIComponent(query)}`;
     }
+  }
 });
+
 });

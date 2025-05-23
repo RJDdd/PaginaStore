@@ -53,12 +53,26 @@
         </div>
     </footer>
     
-    <script src="js/products.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const products = await getProductsByBrand('bandai');
-            renderProducts(products, '#bandai-products');
-        });
-    </script>
+    <!-- bandai.html -->
+<div id="product-list"></div>
+<script type="module">
+  import { getProductsByBrand } from './js/products.js';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const products = await getProductsByBrand('Bandai');
+    const productList = document.getElementById('product-list');
+    products.forEach((product) => {
+      const productCard = document.createElement('div');
+      productCard.classList.add('product-card');
+      productCard.innerHTML = `
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <p>Precio: $${product.price}</p>
+      `;
+      productList.appendChild(productCard);
+    });
+  });
+</script>
+
 </body>
 </html>

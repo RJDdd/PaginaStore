@@ -1,0 +1,41 @@
+<!-- checkout.html -->
+<div id="checkout-summary"></div>
+<button id="pay-button">Pagar</button>
+<script type="module">
+  import { simulatePayment } from './js/checkout.js';
+document.addEventListener('DOMContentLoaded', () => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const summaryContainer = document.getElementById('checkout-summary');
+
+  if (cart.length === 0) {
+    summaryContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
+    return;
+  }
+
+  summaryContainer.innerHTML = `
+    <ul>
+      ${cart.map(item => `
+        <li>${item.name} - Cantidad: ${item.quantity} - Total: $${(item.price * item.quantity).toFixed(2)}</li>
+      `).join('')}
+    </ul>
+    <p><strong>Total: $${cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</strong></p>
+  `;
+});
+
+  document.getElementById('pay-button').addEventListener('click', async () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const orderData = {
+      items: cart,
+      // Agregar más detalles del pedido si es necesario
+    };
+
+    const result = await simulatePayment(orderData);
+    if (result.success) {
+      alert('Pago exitoso');
+      localStorage.removeItem('cart');
+      // Redirigir o mostrar mensaje de éxito
+    } else {
+      alert('Error en el pago');
+    }
+  });
+</script>

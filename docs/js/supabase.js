@@ -1,11 +1,11 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://lrghqupggsruqgxtgsmo.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY || 'tu-clave-anon-public' // Usa la clave anónima para el frontend
+const supabaseUrl = 'https://lrghqupggsruqgxtgsmo.supabase.co';
+const supabaseKey = 'tu-clave-anon-public'; // Reemplaza con tu clave real
 
 export const supabase = createClient(supabaseUrl, supabaseKey, {
-auth: {
-    persistSession: false,
-    autoRefreshToken: false
-}
-})
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+});

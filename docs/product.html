@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Mismo head que index.html -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de Producto - Anime Fig Shop</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Mismo header que index.html -->
-    
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="AnimeFig Logo" class="logo-img">
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar figuras...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-th-list"></i> Categorías</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li class="scroll-down">
+                        <a href="#footer" class="scroll-btn">
+                            <i class="fas fa-arrow-down"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <main class="main-content">
         <section class="product-detail">
             <div class="container" id="product-detail">
@@ -15,29 +45,64 @@
         </section>
     </main>
 
-    <!-- Mismo footer que index.html -->
-    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 AnimeFig Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
     <script>
+        function renderProductDetail(product) {
+            const container = document.getElementById('product-detail');
+            container.innerHTML = `
+                <div class="product-card">
+                    <img src="${product.image_url}" alt="${product.name}" class="product-img">
+                    <div class="product-info">
+                        <h2>${product.name}</h2>
+                        <p>${product.description}</p>
+                        <p><strong>$${product.price}</strong></p>
+                        <button id="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existing = cart.find(item => item.id === product.id);
+
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert('Producto agregado al carrito');
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             
             if (productId) {
-                const { data } = await supabase
+                const { data, error } = await supabase
                     .from('products')
                     .select('*')
                     .eq('id', productId)
                     .single();
                 
+                if (error) {
+                    console.error('Error al obtener producto:', error.message);
+                    return;
+                }
+
                 if (data) renderProductDetail(data);
             }
         });
-        
-        function renderProductDetail(product) {
-            // Implementar renderizado de detalles
-        }
     </script>
+
 </body>
 </html>
