@@ -1,6 +1,5 @@
-export async function simulatePayment(orderData) {
-    console.log("Simulando envío de datos de pago:", orderData);
-    return new Promise(resolve => {
-        setTimeout(() => resolve({ success: true }), 500);
-    });
+export function simulatePayment(cart, total) {
+  console.log('Procesando pago...');
+  console.log('Productos:', cart);
+  console.log('Total:', total.toFixed(2));
 }

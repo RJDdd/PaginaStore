@@ -1,99 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Fig Shop - Coleccionables de Anime</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anime Fig Shop - Inicio</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
-    <header class="header">
-        <div class="top-bar">
-            <div class="container">
-                <div class="logo-container">
-                    <img src="images/logo.png" alt="AnimeFig Logo" class="logo-img">
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Buscar figuras...">
-                    <button class="search-btn"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
+  <header class="header">
+    <div class="top-bar">
+      <div class="container">
+        <div class="logo-container">
+          <img src="images/logo.png" alt="AnimeFig Logo" class="logo-img" />
         </div>
-        
-        <nav class="main-nav">
-            <div class="container">
-                <ul class="nav-links">
-                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#"><i class="fas fa-th-list"></i> Categorías</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
-                    <li class="scroll-down">
-                        <a href="#footer" class="scroll-btn">
-                            <i class="fas fa-arrow-down"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main class="main-content">
-        <section class="hero">
-            <div class="container">
-                <h1>Colecciona tus personajes favoritos</h1>
-                <p>Figuras de alta calidad de tus animes y mangas preferidos</p>
-                <button class="btn view-more">View More</button>
-            </div>
-        </section>
-
-        <section class="featured-products">
-            <div class="container">
-                <h2 class="section-title">Productos Destacados</h2>
-                
-                <div class="product-grid">
-                    <div class="product-card">
-                        <div class="product-content">
-                            <div class="product-image" style="background-image: url('images/bandai-hubby.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Bandai Hubby</h3>
-                                <p>Figure-Rise</p>
-                                <button class="btn view-more">View More</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-content">
-                            <div class="product-image" style="background-image: url('images/digimon-wargreymon.jpg');"></div>
-                            <div class="product-info">
-                                <h3>Standard - Digimon</h3>
-                                <p>Wargreymon Model Kit</p>
-                                <button class="btn view-more">View More</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-content">
-                            <div class="product-image" style="background-image: url('images/one-piece-luffy.jpg');"></div>
-                            <div class="product-info">
-                                <h3>One Piece Gear</h3>
-                                <p>Quinto 5 Sun God Nika Luffy</p>
-                                <button class="btn view-more">View More</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 AnimeFig Shop. Todos los derechos reservados.</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar figuras..." />
+          <button class="search-btn"><i class="fas fa-search"></i></button>
         </div>
-    </footer>
+        <div class="user-cart">
+          <a href="login.html" title="Iniciar sesión"><i class="fas fa-user"></i></a>
+          <a href="checkout.html" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <div class="container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="bandai.html"><i class="fas fa-th-list"></i> Bandai</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-    <script src="js/main.js"></script>
+  <main class="main-content">
+    <section class="product-list">
+      <div class="container" id="product-list">
+        <!-- Productos se cargarán dinámicamente -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 AnimeFig Shop. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { getAllProducts } from './js/products.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const products = await getAllProducts();
+      const container = document.getElementById('product-list');
+      container.innerHTML = products.map(product => `
+        <div class="product-card">
+          <a href="product.html?id=${product.id}">
+            <img src="${product.image_url}" alt="${product.name}" />
+            <h3>${product.name}</h3>
+            <p>$${product.price}</p>
+          </a>
+        </div>
+      `).join('');
+    });
+  </script>
 </body>
 </html>
