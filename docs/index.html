@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anime Fig Shop - Inicio</title>
+  <title>Anime Fig Shop</title>
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
@@ -27,8 +27,16 @@
     <nav class="main-nav">
       <div class="container">
         <ul class="nav-links">
-          <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="bandai.html"><i class="fas fa-th-list"></i> Bandai</a></li>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li>
+            <button id="toggle-categories" class="category-btn"><i class="fas fa-th-list"></i> Categorías</button>
+            <ul id="category-list" class="category-list hidden">
+              <li><a href="bandai.html">Bandai</a></li>
+              <li><a href="banpresto.html">Banpresto</a></li>
+              <li><a href="goodsmile.html">Good Smile</a></li>
+              <li><a href="nendoroid.html">Nendoroid</a></li>
+            </ul>
+          </li>
           <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
         </ul>
       </div>
@@ -38,7 +46,7 @@
   <main class="main-content">
     <section class="product-list">
       <div class="container" id="product-list">
-        <!-- Productos se cargarán dinámicamente -->
+        <!-- Productos principales cargados dinámicamente -->
       </div>
     </section>
   </main>
@@ -50,20 +58,20 @@
   </footer>
 
   <script type="module">
-    import { getAllProducts } from './js/products.js';
+    import { loadProducts } from './js/products.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProducts('product-list');
+    });
+  </script>
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const products = await getAllProducts();
-      const container = document.getElementById('product-list');
-      container.innerHTML = products.map(product => `
-        <div class="product-card">
-          <a href="product.html?id=${product.id}">
-            <img src="${product.image_url}" alt="${product.name}" />
-            <h3>${product.name}</h3>
-            <p>$${product.price}</p>
-          </a>
-        </div>
-      `).join('');
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleButton = document.getElementById('toggle-categories');
+      const categoryList = document.getElementById('category-list');
+
+      toggleButton.addEventListener('click', () => {
+        categoryList.classList.toggle('hidden');
+      });
     });
   </script>
 </body>
