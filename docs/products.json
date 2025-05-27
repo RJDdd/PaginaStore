@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Figura Luffy",
+    "price": 29.99,
+    "image": "images/one-piece-luffy.jpg",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "name": "Figura WarGreymon",
+    "price": 39.99,
+    "image": "images/digimon-wargreymon.jpg",
+    "stock": 5
+  },
+  {
+    "id": 3,
+    "name": "Figura Bandai",
+    "price": 24.99,
+    "image": "images/bandai-hubby.jpg",
+    "stock": 0
+  }
+]

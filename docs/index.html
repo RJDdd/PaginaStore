@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,7 +46,7 @@
 
   <main class="main-content">
     <section class="product-list">
-      <div class="container" id="product-list">
+      <div id="product-container">
         <!-- Productos principales cargados dinámicamente -->
       </div>
     </section>
@@ -57,14 +58,7 @@
     </div>
   </footer>
 
-  <script type="module">
-  import { loadProducts } from './js/products.js';
-  import { setupCategoryToggle } from './js/ui.js';
-  document.addEventListener('DOMContentLoaded', () => {
-    loadProducts('product-list');  // <-- aquí el ID correcto
-    setupCategoryToggle();
-  });
-</script>
+  <script type="module" src="js/main.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
