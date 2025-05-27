@@ -4,16 +4,15 @@ export async function loadProducts(containerId, brand = null) {
   const container = document.getElementById(containerId);
   container.innerHTML = 'Cargando productos...';
 
-  let query = supabase.from('productos').select('*');
+  let query = supabase.from('products').select('*');
 
   if (brand) {
-    query = query.eq('categoria', brand); // "categoria" es tu campo, no "brand"
+    query = query.eq('brand', brand);
   }
 
   const { data: products, error } = await query;
 
   if (error || !products) {
-    console.error(error);
     container.innerHTML = '<p>Error al cargar productos.</p>';
     return;
   }
@@ -25,9 +24,9 @@ export async function loadProducts(containerId, brand = null) {
 
   container.innerHTML = products.map(product => `
     <div class="product-card">
-      <img src="${product.imagen || 'images/default.jpg'}" alt="${product.nombre}" />
-      <h3>${product.nombre}</h3>
-      <p>$${product.precio}</p>
+      <img src="${product.image}" alt="${product.name}" />
+      <h3>${product.name}</h3>
+      <p>$${product.price}</p>
       <button onclick="location.href='product.html?id=${product.id}'">Ver más</button>
     </div>
   `).join('');
