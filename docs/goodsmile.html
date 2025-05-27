@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anime Fig Shop</title>
+  <title>GoodSmile - Anime Fig Shop</title>
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
@@ -25,28 +25,28 @@
       </div>
     </div>
     <nav class="main-nav">
-        <div class="container">
-          <ul class="nav-links">
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li>
-              <button id="toggle-categories" class="category-btn"><i class="fas fa-th-list"></i> Categorías</button>
-              <ul id="category-list" class="category-list hidden">
-                <li><a href="bandai.html">Bandai</a></li>
-                <li><a href="goodsmile.html">GoodSmile</a></li>
-                <li><a href="maxfactory.html">MaxFactory</a></li>
-                <li><a href="kotobukiya.html">Kotobukiya</a></li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
-          </ul>
-        </div>
-      </nav>
+      <div class="container">
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li>
+            <button id="toggle-categories" class="category-btn"><i class="fas fa-th-list"></i> Categorías</button>
+            <ul id="category-list" class="category-list hidden">
+              <li><a href="bandai.html">Bandai</a></li>
+              <li><a href="goodsmile.html">GoodSmile</a></li>
+              <li><a href="maxfactory.html">MaxFactory</a></li>
+              <li><a href="kotobukiya.html">Kotobukiya</a></li>
+            </ul>
+          </li>
+          <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
   </header>
 
   <main class="main-content">
     <section class="product-list">
-      <div class="container" id="product-list">
-        <!-- Productos principales cargados dinámicamente -->
+      <div class="container" id="goodsmile-products">
+        <!-- Productos se cargan aquí -->
       </div>
     </section>
   </main>
@@ -59,19 +59,11 @@
 
   <script type="module">
     import { loadProducts } from './js/products.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      loadProducts('product-list');
-    });
-  </script>
+    import { setupCategoryToggle } from './js/ui.js';
 
-  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const toggleButton = document.getElementById('toggle-categories');
-      const categoryList = document.getElementById('category-list');
-
-      toggleButton.addEventListener('click', () => {
-        categoryList.classList.toggle('hidden');
-      });
+      loadProducts('goodsmile-products', 'GoodSmile');
+      setupCategoryToggle();
     });
   </script>
 </body>
