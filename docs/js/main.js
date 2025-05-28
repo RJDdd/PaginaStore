@@ -1,12 +1,22 @@
-// main.js
 import { loadProducts } from './products.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   loadProducts('product-container');
+
+  // Toggle categorías
+  const toggleBtn = document.getElementById('toggle-categories');
+  const categoryList = document.getElementById('category-list');
+
+  toggleBtn.addEventListener('click', () => {
+    const isHidden = categoryList.classList.contains('hidden');
+    if (isHidden) {
+      categoryList.classList.remove('hidden');
+    } else {
+      categoryList.classList.add('hidden');
+    }
+  });
 });
 
 window.addToCart = function(productId) {
-  // Lógica para añadir el producto al carrito
   console.log(`Producto con ID ${productId} añadido al carrito.`);
-  // Aquí puedes implementar la lógica para almacenar el carrito en localStorage o en una variable global
 };

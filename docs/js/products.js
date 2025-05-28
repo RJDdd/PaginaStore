@@ -1,4 +1,4 @@
-export async function loadProducts(containerId) {
+export async function loadProducts(containerId, brand) {
   const container = document.getElementById(containerId);
   container.innerHTML = 'Cargando productos...';
 
@@ -6,12 +6,15 @@ export async function loadProducts(containerId) {
     const response = await fetch('./products.json');
     const products = await response.json();
 
-    if (products.length === 0) {
-      container.innerHTML = '<p>No hay productos disponibles.</p>';
+    const filtered = brand ? products.filter(p => p.brand === brand) : products;
+
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<p>No hay productos disponibles para esta marca.</p>';
       return;
     }
 
-    container.innerHTML = products.map(product => `
+    container.innerHTML = filtered.map(product => `
       <div class="product-card">
         <img src="${product.image}" alt="${product.name}" />
         <h3>${product.name}</h3>

@@ -4,20 +4,31 @@
     "name": "Figura Luffy",
     "price": 29.99,
     "image": "images/one-piece-luffy.jpg",
-    "stock": 10
+    "stock": 10,
+    "brand": "goodsmile"
   },
   {
     "id": 2,
     "name": "Figura WarGreymon",
     "price": 39.99,
     "image": "images/digimon-wargreymon.jpg",
-    "stock": 5
+    "stock": 5,
+    "brand": "kotobukiya"
   },
   {
     "id": 3,
-    "name": "Figura Bandai",
+    "name": "Figura Gundam",
     "price": 24.99,
-    "image": "images/bandai-hubby.jpg",
-    "stock": 0
+    "image": "images/bandai-gundam.jpg",
+    "stock": 0,
+    "brand": "Bandai"
+  },
+  {
+    "id": 4,
+    "name": "Figura Saber",
+    "price": 49.99,
+    "image": "images/saber-fig.jpg",
+    "stock": 3,
+    "brand": "maxfactory"
   }
 ]
