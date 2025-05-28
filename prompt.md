@@ -1,0 +1,3 @@
+## Realmente no cree un prompt expecifico y use unos 8 chats por llegar al limite de estos, lo primero que pedi fue algo como: Ayudame a crear la simulacion de una tienda en linea. Quiero que se va como lo que se ve en la imagen
+![Moodboard](docs\images\moodboard-animefig.png)
+ ## Despues de eso las demas mensages fueron para hacer cambios visuales, funcionales, dudas y revisiones.Hay todo un chat intentando hacer que el boton de  categorias funcionara como un interuptor que hacia aparecer las categorias, pero nunca se pudo asi que lo cambie y las 4 categorias quedaron mejores como botones directamente. 

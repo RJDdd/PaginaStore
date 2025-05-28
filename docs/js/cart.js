@@ -1,38 +1,21 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// cart.js
+export function addToCart(productId) {
+  fetch('./products.json')
+    .then(res => res.json())
+    .then(products => {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
 
-export function addToCart(productId, quantity = 1) {
-  const existingItem = cart.find((item) => item.id === productId);
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existing = cart.find(p => p.id === productId);
 
-  if (existingItem) {
-    existingItem.quantity += quantity;
-  } else {
-    cart.push({ id: productId, quantity });
-  }
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+      }
 
-  updateCart();
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${product.name} añadido al carrito.`);
+    });
 }
-
-export function removeFromCart(productId) {
-  cart = cart.filter((item) => item.id !== productId);
-  updateCart();
-}
-
-function updateCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartUI();
-  updateCartCounter();
-}
-
-function updateCartCounter() {
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.querySelectorAll('.cart-counter').forEach((el) => {
-    el.textContent = count;
-  });
-}
-
-function updateCartUI() {
-  // Implementar la actualización visual del carrito
-}
-
-// Inicializar el contador del carrito al cargar la página
-document.addEventListener('DOMContentLoaded', updateCartCounter);

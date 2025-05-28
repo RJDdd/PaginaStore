@@ -27,9 +27,72 @@
     "id": 4,
     "name": "Trunks",
     "price": 49.99,
-    "image": "images\fig (1).jpg",
+    "image": "images/Trunks.jpg",
     "stock": 6,
     "brand": "maxfactory"
+  },
+  {
+    "id": 5,
+    "name": "Figura Chainsaw Man",
+    "price": 34.99,
+    "image": "images/fig (2).jpg",
+    "stock": 8,
+    "brand": "goodsmile"
+  },
+  {
+    "id": 6,
+    "name": "Figura Star Wars",
+    "price": 44.99,
+    "image": "images/fig (3).jpg",
+    "stock": 12,
+    "brand": "maxfactory"
+  },
+  {
+    "id": 7,
+    "name": "Figura Kaiju No. 8",
+    "price": 39.99,
+    "image": "images/fig (4).jpg",
+    "stock": 15,
+    "brand": "kotobukiya"
+  },
+  {
+    "id": 8,
+    "name": "Figura Yugioh",
+    "price": 54.99,
+    "image": "images/fig (5).jpg",
+    "stock": 20,
+    "brand": "Bandai"
+  },
+  {
+    "id": 9,
+    "name": "Figura WarHammer 40k",
+    "price": 59.99,
+    "image": "images/fig (6).jpg",
+    "stock": 18,
+    "brand": "goodsmile"
+  },
+  {
+    "id": 10,
+    "name": "Figura Freeza",
+    "price": 49.99,
+    "image": "images/fig (7).jpg",
+    "stock": 25,
+    "brand": "Bandai"
+  },
+  {
+    "id": 12,
+    "name": "Figura All Might",
+    "price": 44.99,
+    "image": "images/fig (8).jpg",
+    "stock": 22,
+    "brand": "kotobukiya"
+  },
+  {
+    "id": 13,
+    "name": "Figura Demon Slayer",
+    "price": 49.99,
+    "image": "images/fig (9).jpg",
+    "stock": 17,
+    "brand": "kotobukiya"
   }
-
 ]
