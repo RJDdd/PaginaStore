@@ -1,30 +1,78 @@
-export async function loadProducts(containerId, brand) {
+// js/products.js
+export async function loadProducts(containerId, brandFilter) {
+  const res = await fetch('products.json');
+  const products = await res.json();
   const container = document.getElementById(containerId);
-  container.innerHTML = 'Cargando productos...';
 
-  try {
-    const response = await fetch('./products.json');
-    const products = await response.json();
+  // Limpiar contenido previo
+  container.innerHTML = '';
 
-    const filtered = brand ? products.filter(p => p.brand === brand) : products;
+  products
+    .filter(p => !brandFilter || p.brand.toLowerCase() === brandFilter.toLowerCase())
+    .forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
 
+      const stockText = product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado';
+      const disabledAttr = product.stock > 0 ? '' : 'disabled';
 
-    if (filtered.length === 0) {
-      container.innerHTML = '<p>No hay productos disponibles para esta marca.</p>';
-      return;
-    }
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="product-image"/>
+        <h3 class="product-name">${product.name}</h3>
+        <p class="product-price">$${product.price}</p>
+        <p class="product-stock" id="stock-${product.id}">${stockText}</p>
+        <button class="add-to-cart-btn" data-id="${product.id}" ${disabledAttr}>Añadir al carrito</button>
+      `;
 
-    container.innerHTML = filtered.map(product => `
-      <div class="product-card">
-        <img src="${product.image}" alt="${product.name}" />
-        <h3>${product.name}</h3>
-        <p>Precio: $${product.price}</p>
-        <p>Stock: ${product.stock > 0 ? product.stock : 'Agotado'}</p>
-        <button ${product.stock === 0 ? 'disabled' : ''} onclick="addToCart(${product.id})">Añadir al carrito</button>
-      </div>
-    `).join('');
-  } catch (error) {
-    console.error('Error cargando productos:', error);
-    container.innerHTML = '<p>Error al cargar productos.</p>';
-  }
+      container.appendChild(card);
+    });
+
+  // Activar botones después de generar los productos
+  activateCartButtons(products);
+}
+
+function activateCartButtons(products) {
+  const buttons = document.querySelectorAll('.add-to-cart-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = parseInt(button.dataset.id);
+      const product = products.find(p => p.id === id);
+      if (!product || product.stock <= 0) {
+        alert('Producto agotado.');
+        return;
+      }
+
+      // Leer carrito actual
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemInCart = cart.find(item => item.id === id);
+
+      // Control de cantidad
+      if (itemInCart) {
+        if (itemInCart.quantity < product.stock) {
+          itemInCart.quantity += 1;
+        } else {
+          alert('No hay más unidades disponibles.');
+          return;
+        }
+      } else {
+        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+      }
+
+      // Guardar carrito
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Actualizar stock en pantalla
+      const quantityInCart = itemInCart ? itemInCart.quantity : 1;
+      const newStock = product.stock - quantityInCart;
+      const stockElement = document.getElementById(`stock-${product.id}`);
+      if (stockElement) {
+        stockElement.textContent = newStock > 0 ? `Stock: ${newStock}` : 'Agotado';
+      }
+
+      // Desactivar botón si se agota
+      if (newStock <= 0) {
+        button.disabled = true;
+      }
+    });
+  });
 }
