@@ -190,3 +190,67 @@ body {
     background-color: darken($secondary-color, 10%);
   }
 }
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  background-color: #f8f8f8;
+
+  .auth-box {
+    background: white;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #333;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      input {
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        padding: 0.8rem;
+        background-color: #ff4081; // Puedes usar tu color principal
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background-color: darken(#ff4081, 10%);
+        }
+      }
+    }
+
+    .auth-switch {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+
+      a {
+        color: #ff4081;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
