@@ -25,10 +25,11 @@
   },
   {
     "id": 4,
-    "name": "Figura Saber",
+    "name": "Trunks",
     "price": 49.99,
-    "image": "images/saber-fig.jpg",
-    "stock": 3,
+    "image": "images\fig (1).jpg",
+    "stock": 6,
     "brand": "maxfactory"
   }
+
 ]
